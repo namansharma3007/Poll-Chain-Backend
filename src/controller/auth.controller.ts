@@ -11,20 +11,20 @@ const generateAccessToken = (userId: string): string => {
   const secret = process.env.ACCESS_TOKEN_SECRET;
   if (!secret) throw new ApiError(500, "ACCESS_TOKEN_SECRET not configured");
 
-  // const expiry = process.env.ACCESS_TOKEN_EXPIRY;
-  // if (!expiry) throw new ApiError(500, "ACCESS_TOKEN_EXPIRY not configured");
+  const expiry = process.env.ACCESS_TOKEN_EXPIRY;
+  if (!expiry) throw new ApiError(500, "ACCESS_TOKEN_EXPIRY not configured");
 
-  return jwt.sign({ userId }, secret, { expiresIn: "1d" });
+  return jwt.sign({ userId }, secret, { expiresIn: Number(expiry) });
 };
 
 const generateRefreshToken = (userId: string): string => {
   const secret = process.env.REFRESH_TOKEN_SECRET;
   if (!secret) throw new ApiError(500, "REFRESH_TOKEN_SECRET not configured");
 
-  // const expiry = process.env.REFRESH_TOKEN_EXPIRY;
-  // if (!expiry) throw new ApiError(500, "REFRESH_TOKEN_EXPIRY not configured");
+  const expiry = process.env.REFRESH_TOKEN_EXPIRY;
+  if (!expiry) throw new ApiError(500, "REFRESH_TOKEN_EXPIRY not configured");
 
-  return jwt.sign({ userId }, secret, { expiresIn: "7d" });
+  return jwt.sign({ userId }, secret, { expiresIn: Number(expiry) });
 };
 
 const signup = asyncHandler(async (req: Request, res: Response) => {
@@ -128,7 +128,6 @@ const login = asyncHandler(async (req: Request, res: Response) => {
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax" as const,
     maxAge: 24 * 60 * 60 * 1000,
-    // maxAge: Number(process.env.ACCESS_TOKEN_EXPIRY),
   };
 
   const refreshTokenCookiesOptions = {
@@ -136,7 +135,6 @@ const login = asyncHandler(async (req: Request, res: Response) => {
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax" as const,
     maxAge: 7 * 24 * 60 * 60 * 1000,
-    // maxAge: Number(process.env.REFRESH_TOKEN_EXPIRY),
   };
 
   res
@@ -240,7 +238,6 @@ const refreshAccessToken = asyncHandler(async (req: Request, res: Response) => {
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax" as const,
     maxAge: 24 * 60 * 60 * 1000,
-    // maxAge: Number(process.env.ACCESS_TOKEN_EXPIRY),
   };
 
   res
