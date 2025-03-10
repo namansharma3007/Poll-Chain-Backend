@@ -185,7 +185,6 @@ const logOut = asyncHandler(async (req: Request, res: Response) => {
 const checkSession = asyncHandler(async (req: Request, res: Response) => {
   const incomingAccessToken =
     req.headers.authorization?.split(" ")[1] || req.cookies?.accessToken;
-  console.log("incomingAccessToken", incomingAccessToken);
 
   if (!incomingAccessToken) {
     throw new ApiError(401, "Unauthorized - No token provided");
