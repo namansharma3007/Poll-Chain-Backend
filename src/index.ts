@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import cookieParser from "cookie-parser"; // Import cookie-parser 
+import cookieParser from "cookie-parser"; // Import cookie-parser
 import "dotenv/config";
 
 import { errorHandler } from "./middleware/errorHandling.middleware";
@@ -11,10 +11,12 @@ const app = express();
 
 const PORT = process.env.PORT || 5555;
 
-app.use(cors({
-  origin: process.env.ACCESS_ORIGIN_URL || "http://localhost:3000",
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: process.env.ACCESS_ORIGIN_URL || "http://localhost:3000",
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 app.use(cookieParser());
@@ -27,4 +29,3 @@ app.listen(PORT, () => {
   connectDB();
   console.log(`Server is running on port ${PORT}`);
 });
-
