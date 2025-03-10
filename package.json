@@ -2,10 +2,10 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "scripts": {
     "start": "npm run build && node dist/index.js",
-    "startDev": "rmdir /S /Q dist && npm run build && node dist/index.js",
+    "startDev": "npx rimraf dist && npm run build && node dist/index.js",
     "build": "tsc -b",
     "dev": "tsc-watch --onSuccess \"node dist/index.js\""
   },
@@ -19,6 +19,7 @@
     "@types/express": "^5.0.0",
     "@types/jsonwebtoken": "^9.0.9",
     "@types/multer": "^1.4.12",
+    "rimraf": "^6.0.1",
     "typescript": "^5.8.2"
   },
   "dependencies": {
