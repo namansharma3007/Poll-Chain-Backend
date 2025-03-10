@@ -2,6 +2,13 @@
 
 This is the backend service for the Web3 Polling Application. Built with TypeScript and Express.js, this project handles user authentication, poll management, avatar uploads, and other backend operations. It integrates various libraries and services to ensure secure and efficient data handling and storage.
 
+## Frontend Repository
+
+The frontend for this project is managed separately and provides the user interface that interacts with this backend.
+
+Check out the frontend repository here: https://github.com/namansharma3007/Poll-Chain-frontend
+
+
 ## Features
 
 - **RESTful API**:  
