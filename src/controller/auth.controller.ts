@@ -134,14 +134,14 @@ const login = asyncHandler(async (req: Request, res: Response) => {
   const accessTokenCookiesOptions = {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "lax" as const,
+    sameSite: "none" as const,
     maxAge: 24 * 60 * 60 * 1000, // 1 day
   };
 
   const refreshTokenCookiesOptions = {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "lax" as const,
+    sameSite: "none" as const,
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   };
 
@@ -170,13 +170,13 @@ const logOut = asyncHandler(async (req: Request, res: Response) => {
   res.clearCookie("accessToken", {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "lax" as const,
+    sameSite: "none" as const,
   });
 
   res.clearCookie("refreshToken", {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "lax" as const,
+    sameSite: "none" as const,
   });
 
   res.status(200).json(new ApiResponse(200, "Logged out successfully"));
@@ -239,13 +239,13 @@ const refreshAccessToken = asyncHandler(async (req: Request, res: Response) => {
   res.clearCookie("accessToken", {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "lax" as const,
+    sameSite: "none" as const,
   });
 
   const accessTokenCookiesOptions = {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "lax" as const,
+    sameSite: "none" as const,
     maxAge: 24 * 60 * 60 * 1000, // 1 day
   };
 
