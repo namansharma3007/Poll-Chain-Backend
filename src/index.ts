@@ -15,6 +15,8 @@ app.use(
   cors({
     origin: process.env.ACCESS_ORIGIN_URL || "http://localhost:3000",
     credentials: true,
+    methods: ["GET", "POST", "PATCH"],
+    allowedHeaders: ["Content-Type", "application/json"],
   })
 );
 
