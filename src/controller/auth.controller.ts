@@ -11,20 +11,20 @@ const generateAccessToken = (userId: string): string => {
   const secret = process.env.ACCESS_TOKEN_SECRET;
   if (!secret) throw new ApiError(500, "ACCESS_TOKEN_SECRET not configured");
 
-  const expiry = process.env.ACCESS_TOKEN_EXPIRY;
-  if (!expiry) throw new ApiError(500, "ACCESS_TOKEN_EXPIRY not configured");
+  // const expiry = process.env.ACCESS_TOKEN_EXPIRY;
+  // if (!expiry) throw new ApiError(500, "ACCESS_TOKEN_EXPIRY not configured");
 
-  return jwt.sign({ userId }, secret, { expiresIn: Number(expiry) });
+  return jwt.sign({ userId }, secret, { expiresIn: "1d" });
 };
 
 const generateRefreshToken = (userId: string): string => {
   const secret = process.env.REFRESH_TOKEN_SECRET;
   if (!secret) throw new ApiError(500, "REFRESH_TOKEN_SECRET not configured");
 
-  const expiry = process.env.REFRESH_TOKEN_EXPIRY;
-  if (!expiry) throw new ApiError(500, "REFRESH_TOKEN_EXPIRY not configured");
+  // const expiry = process.env.REFRESH_TOKEN_EXPIRY;
+  // if (!expiry) throw new ApiError(500, "REFRESH_TOKEN_EXPIRY not configured");
 
-  return jwt.sign({ userId }, secret, { expiresIn: Number(expiry) });
+  return jwt.sign({ userId }, secret, { expiresIn: "7d" });
 };
 
 const signup = asyncHandler(async (req: Request, res: Response) => {
