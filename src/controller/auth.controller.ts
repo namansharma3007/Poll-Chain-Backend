@@ -317,7 +317,7 @@ const updateProfile = asyncHandler(async (req: Request, res: Response) => {
     "-password -refreshToken -avatarPublicId"
   );
 
-  res.status(200).json(new ApiResponse(200, "Profile updated", updatedUser));
+  res.status(200).json(new ApiResponse(200, "Profile updated", {user: updatedUser}));
 });
 
 const getAllActiveUsers = asyncHandler(async (req: Request, res: Response) => {
