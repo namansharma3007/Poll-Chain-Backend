@@ -25,8 +25,8 @@ app.use(express.json());
 app.use(cookieParser());
 
 
-// This code is only written because render automatically gets inactive after 15 minutes so this is in order to hit api url after every 10 minutes
-cron.schedule('*/10 * * * *', async () => {
+// This code is only written because render automatically gets inactive after 15 minutes so this is in order to hit api url after every 14 minutes
+cron.schedule('*/14 * * * *', async () => {
   try {
     console.log('Running scheduled task:', new Date().toISOString());
         const response = await fetch('https://poll-chain-backend.onrender.com/api/test', {
