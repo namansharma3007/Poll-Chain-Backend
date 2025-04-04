@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 import express from "express";
 import cors from "cors";
+import cron from "node-cron";
 import cookieParser from "cookie-parser"; // Import cookie-parser
 import "dotenv/config";
 
@@ -22,6 +23,21 @@ app.use(
 
 app.use(express.json());
 app.use(cookieParser());
+
+
+// This code is only written because render automatically gets inactive after 15 minutes so this is in order to hit api url after every 10 minutes
+cron.schedule('*/10 * * * *', async () => {
+  try {
+    console.log('Running scheduled task:', new Date().toISOString());
+        const response = await fetch('https://poll-chain-backend.onrender.com/api/test', {
+        method: 'GET'
+    });
+    const data = await response.json();
+    console.log('Scheduled API call response:', data);
+  } catch (error) {
+    console.error('Error in scheduled task:', error);
+  }
+});
 
 app.use("/api/v1/auth", authRoute);
 app.get("/api/test", async (req: Request, res: Response) => {
